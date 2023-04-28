@@ -21,18 +21,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.io.Serializable;
 
+/**
+ * The class represents the parking space entity.
+ * @author Yon Mauricio Ruiz Beltrán {@literal <ymruiz@estudiante.uniajc.edu.co>}
+ */
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "parking_space")
-/**
- * The class represents the parking space entity.
- * @author Yon Mauricio Ruiz Beltrán {@literal <ymruiz@estudiante.uniajc.edu.co>}
- */
 public class ParkingSpace implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ParkingSpaceId")
+    @SequenceGenerator(name = "ParkingSpaceId", sequenceName = "PARKING_SPACE_SEQ")
     private long id;
     private String type;
     private int state;

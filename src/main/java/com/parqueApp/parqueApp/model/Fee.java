@@ -21,6 +21,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * The class represents the fee entity.
@@ -33,15 +34,17 @@ import java.io.Serializable;
 @Table(name = "fee")
 public class Fee implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FeeId")
+    @SequenceGenerator(name = "FeeId", sequenceName = "FEE_SEQ")
     private long id;
-    private String type;
+    @Column(columnDefinition = "NUMERIC(10,2)")
+    private BigDecimal value;
     @OneToOne
     @JoinColumn(name = "vehicle")
     private Vehicle vehicle;
 
-    public Fee(String type, Vehicle vehicle) {
-        this.type = type;
+    public Fee(BigDecimal value, Vehicle vehicle) {
+        this.value = value;
         this.vehicle = vehicle;
     }
 }

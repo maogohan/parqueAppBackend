@@ -20,7 +20,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.io.Serializable;
-import java.util.Date;
+import java.math.BigDecimal;
+import java.time.LocalTime;
 
 /**
  * The class represents the parking lot entity.
@@ -33,16 +34,19 @@ import java.util.Date;
 @Table(name = "parking_lot")
 public class ParkingLot implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ParkingLotId")
+    @SequenceGenerator(name = "ParkingLotId", sequenceName = "PARKING_LOT_SEQ")
     private long id;
     private String name;
-    private Date start_date;
-    private Date end_date;
+    private LocalTime start_date;
+    private LocalTime end_date;
     private String address;
-    private double altitude;
-    private double longitude;
+    @Column(columnDefinition = "NUMERIC(10,8)")
+    private BigDecimal altitude;
+    @Column(columnDefinition = "NUMERIC(10,8)")
+    private BigDecimal longitude;
 
-    public ParkingLot(String name, Date start_date, Date end_date, String address, double altitude, double longitude) {
+    public ParkingLot(String name, LocalTime start_date, LocalTime end_date, String address, BigDecimal altitude, BigDecimal longitude) {
         this.name = name;
         this.start_date = start_date;
         this.end_date = end_date;

@@ -21,33 +21,34 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
+/**
+ * The class represents the ticket entity.
+ * @author Yon Mauricio Ruiz Beltrán {@literal <ymruiz@estudiante.uniajc.edu.co>}
+ */
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "ticket")
-/**
- * The class represents the ticket entity.
- * @author Yon Mauricio Ruiz Beltrán {@literal <ymruiz@estudiante.uniajc.edu.co>}
- */
 public class Ticket implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TicketId")
+    @SequenceGenerator(name = "TicketId", sequenceName = "TICKET_SEQ")
     private long id;
-    private long timestamp;
-    private long start_time;
-    private long end_time;
-    private double value;
+    private LocalDate date;
+    private LocalTime start_time;
+    private LocalTime end_time;
     @OneToOne
     @JoinColumn(name = "vehicle")
     private Vehicle vehicle;
 
-    public Ticket(long timestamp, long start_time, long end_time, double value, Vehicle vehicle) {
-        this.timestamp = timestamp;
+    public Ticket(LocalDate date, LocalTime start_time, LocalTime end_time, Vehicle vehicle) {
+        this.date = date;
         this.start_time = start_time;
         this.end_time = end_time;
-        this.value = value;
         this.vehicle = vehicle;
     }
 }

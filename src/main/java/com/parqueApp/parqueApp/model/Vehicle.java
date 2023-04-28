@@ -33,13 +33,11 @@ import java.io.Serializable;
 @Table(name = "vehicle")
 public class Vehicle implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "VehicleId")
+    @SequenceGenerator(name = "VehicleId", sequenceName = "VEHICLE_SEQ")
     private long id;
     private String plate;
     private String type;
-    private long timestamp;
-    private long start_time;
-    private long end_time;
     @ManyToOne
     @JoinColumn(name = "id_employee")
     private Employee employee;
@@ -47,12 +45,9 @@ public class Vehicle implements Serializable {
     @JoinColumn(name = "id_customer")
     private Customer customer;
 
-    public Vehicle(String plate, String type, long timestamp, long start_time, long end_time, Employee employee, Customer customer) {
+    public Vehicle(String plate, String type, Employee employee, Customer customer) {
         this.plate = plate;
         this.type = type;
-        this.timestamp = timestamp;
-        this.start_time = start_time;
-        this.end_time = end_time;
         this.employee = employee;
         this.customer = customer;
     }

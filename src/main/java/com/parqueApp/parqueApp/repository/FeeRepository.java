@@ -17,8 +17,10 @@ package com.parqueApp.parqueApp.repository;
 
 import com.parqueApp.parqueApp.model.Fee;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author Yon Mauricio Ruiz Beltrán {@literal <ymruiz@estudiante.uniajc.edu.co>}
  */
+@Repository
 public interface FeeRepository extends JpaRepository<Fee, Long> { }

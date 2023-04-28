@@ -33,7 +33,8 @@ import java.io.Serializable;
 @Table(name = "customer")
 public class Customer implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CustomerId")
+    @SequenceGenerator(name = "CustomerId", sequenceName = "CUSTOMER_SEQ")
     private long id;
     int id_card;
     String first_name;
