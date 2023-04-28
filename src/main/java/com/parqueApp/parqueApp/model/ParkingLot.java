@@ -42,16 +42,16 @@ public class ParkingLot implements Serializable {
     private LocalTime end_date;
     private String address;
     @Column(columnDefinition = "NUMERIC(10,8)")
-    private BigDecimal altitude;
+    private BigDecimal latitude;
     @Column(columnDefinition = "NUMERIC(10,8)")
     private BigDecimal longitude;
 
-    public ParkingLot(String name, LocalTime start_date, LocalTime end_date, String address, BigDecimal altitude, BigDecimal longitude) {
+    public ParkingLot(String name, LocalTime start_date, LocalTime end_date, String address, BigDecimal latitude, BigDecimal longitude) {
         this.name = name;
         this.start_date = start_date;
         this.end_date = end_date;
         this.address = address;
-        this.altitude = altitude;
+        this.latitude = latitude;
         this.longitude = longitude;
     }
 }
