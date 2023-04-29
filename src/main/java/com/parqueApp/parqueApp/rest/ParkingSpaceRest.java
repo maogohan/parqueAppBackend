@@ -46,4 +46,10 @@ public class ParkingSpaceRest {
     {
         return parkingSpaceRepository.getAllParkingSpacesByParkingLotId(parking_lot_id);
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "getAllParkingSpacesEnableByParkingLotId/{parking_lot_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    private List<ParkingSpace> getAllParkingSpacesEnableByParkingLotId(@PathVariable("parking_lot_id") long parking_lot_id)
+    {
+        return parkingSpaceRepository.getAllParkingSpacesEnableByParkingLotId(parking_lot_id);
+    }
 }
