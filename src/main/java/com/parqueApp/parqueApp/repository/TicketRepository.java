@@ -29,7 +29,7 @@ import java.util.List;
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
-    @Query(value = "SELECT t FROM Ticket f")
+    @Query(value = "SELECT t FROM Ticket t")
     List<Ticket> getAllTickets();
 
     @Query(value = "SELECT t FROM Ticket t WHERE t.vehicle.id = :vehicle_id")

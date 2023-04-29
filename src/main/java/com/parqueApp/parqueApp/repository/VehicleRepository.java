@@ -31,6 +31,6 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
     @Query(value = "SELECT v FROM Vehicle v")
     List<Vehicle> getAllVehicles();
 
-    @Query(value = "SELECT v FROM Vehicle v WHERE v.parking_lot.id = :parking_lot_id")
-    List<Vehicle> getAllVehiclesByParkingLotId(@Param("parking_lot_id") long parking_lot_id);
+    /*@Query(value = "SELECT v FROM Vehicle v WHERE v.parking_space.id = :parking_space_id")
+    List<Vehicle> getAllVehiclesByParkingSpaceId(@Param("parking_space_id") long parking_space_id);*/
 }

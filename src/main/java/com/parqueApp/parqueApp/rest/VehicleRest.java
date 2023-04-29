@@ -41,9 +41,9 @@ public class VehicleRest {
         return vehicleRepository.getAllVehicles();
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "getAllServicesByParkingLotId/{parking_lot_id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    private List<Vehicle> getAllServicesByParkingLotId(@PathVariable("parking_lot_id") long parking_lot_id)
+    /*@RequestMapping(method = RequestMethod.GET, value = "getAllVehiclesByParkingSpaceId/{parking_space_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    private List<Vehicle> getAllVehiclesByParkingSpaceId(@PathVariable("parking_space_id") long parking_space_id)
     {
-        return vehicleRepository.getAllVehiclesByParkingLotId(parking_lot_id);
-    }
+        return vehicleRepository.getAllVehiclesByParkingSpaceId(parking_space_id);
+    }*/
 }
