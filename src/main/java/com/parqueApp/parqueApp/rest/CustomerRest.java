@@ -20,6 +20,7 @@ import com.parqueApp.parqueApp.repository.CustomerRepository;
 import com.parqueApp.parqueApp.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,5 +40,11 @@ public class CustomerRest {
     private List<Customer> getAllCustomers()
     {
         return customerRepository.getAllCustomers();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "getCustomerById/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    private Customer getCustomerById(@PathVariable("id") long id)
+    {
+        return customerRepository.getCustomerById(id);
     }
 }

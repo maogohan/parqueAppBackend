@@ -17,10 +17,20 @@ package com.parqueApp.parqueApp.repository;
 
 import com.parqueApp.parqueApp.model.Fee;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author Yon Mauricio Ruiz Beltrán {@literal <ymruiz@estudiante.uniajc.edu.co>}
  */
 @Repository
-public interface FeeRepository extends JpaRepository<Fee, Long> { }
+public interface FeeRepository extends JpaRepository<Fee, Long> {
+    @Query(value = "SELECT f FROM Fee f")
+    List<Fee> getAllFees();
+
+    @Query(value = "SELECT f FROM Fee f WHERE f.vehicle.id = :vehicle_id")
+    List<Fee> getAllFeesByVehicleId(@Param("vehicle_id") long vehicle_id);
+}

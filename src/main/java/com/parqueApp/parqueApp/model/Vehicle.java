@@ -44,11 +44,15 @@ public class Vehicle implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_customer")
     private Customer customer;
+    @OneToOne
+    @JoinColumn(name = "id_parking_space")
+    private ParkingSpace parkingSpace;
 
-    public Vehicle(String plate, String type, Employee employee, Customer customer) {
+    public Vehicle(String plate, String type, Employee employee, Customer customer, ParkingSpace parkingSpace) {
         this.plate = plate;
         this.type = type;
         this.employee = employee;
         this.customer = customer;
+        this.parkingSpace = parkingSpace;
     }
 }

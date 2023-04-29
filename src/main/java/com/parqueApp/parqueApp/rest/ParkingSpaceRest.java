@@ -16,9 +16,10 @@
 package com.parqueApp.parqueApp.rest;
 
 import com.parqueApp.parqueApp.model.ParkingSpace;
-import com.parqueApp.parqueApp.service.ParkingSpaceService;
+import com.parqueApp.parqueApp.repository.ParkingSpaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,11 +33,17 @@ import java.util.List;
 @RequestMapping("/parking-space/")
 public class ParkingSpaceRest {
     @Autowired
-    private ParkingSpaceService parkingSpaceService;
+    private ParkingSpaceRepository parkingSpaceRepository;
 
-    @RequestMapping(method = RequestMethod.GET, value = "getAllParkingSpace", produces = MediaType.APPLICATION_JSON_VALUE)
-    private List<ParkingSpace> getAllParkingSpace()
+    @RequestMapping(method = RequestMethod.GET, value = "getAllParkingSpaces", produces = MediaType.APPLICATION_JSON_VALUE)
+    private List<ParkingSpace> getAllParkingSpaces()
     {
-        return parkingSpaceService.findAll();
+        return parkingSpaceRepository.getAllParkingSpaces();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "getAllParkingSpacesByParkingLotId/{parking_lot_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    private List<ParkingSpace> getAllParkingSpacesByParkingLotId(@PathVariable("parking_lot_id") long parking_lot_id)
+    {
+        return parkingSpaceRepository.getAllParkingSpacesByParkingLotId(parking_lot_id);
     }
 }

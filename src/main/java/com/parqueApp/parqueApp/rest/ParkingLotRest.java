@@ -16,6 +16,7 @@
 package com.parqueApp.parqueApp.rest;
 
 import com.parqueApp.parqueApp.model.ParkingLot;
+import com.parqueApp.parqueApp.repository.ParkingLotRepository;
 import com.parqueApp.parqueApp.service.ParkingLotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -31,11 +32,11 @@ import java.util.List;
 @RequestMapping("/parking-lot/")
 public class ParkingLotRest {
     @Autowired
-    private ParkingLotService parkingLotService;
+    private ParkingLotRepository parkingLotRepository;
 
-    @RequestMapping(method = RequestMethod.GET, value = "getAllParkingLot", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.GET, value = "getAllParkingLots", produces = MediaType.APPLICATION_JSON_VALUE)
     private List<ParkingLot> getAllParkingLot()
     {
-        return parkingLotService.findAll();
+        return parkingLotRepository.getAllParkingLots();
     }
 }

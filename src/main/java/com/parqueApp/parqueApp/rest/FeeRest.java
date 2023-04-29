@@ -16,9 +16,11 @@
 package com.parqueApp.parqueApp.rest;
 
 import com.parqueApp.parqueApp.model.Fee;
+import com.parqueApp.parqueApp.model.ParkingSpace;
 import com.parqueApp.parqueApp.repository.FeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,6 +39,12 @@ public class FeeRest {
     @RequestMapping(method = RequestMethod.GET, value = "getAllFees", produces = MediaType.APPLICATION_JSON_VALUE)
     private List<Fee> getAllFees()
     {
-        return feeRepository.findAll();
+        return feeRepository.getAllFees();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "getAllFeesByVehicleId/{vehicle_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    private List<Fee> getAllFeesByVehicletId(@PathVariable("vehicle_id") long vehicle_id)
+    {
+        return feeRepository.getAllFeesByVehicleId(vehicle_id);
     }
 }

@@ -15,10 +15,12 @@
  */
 package com.parqueApp.parqueApp.rest;
 
+import com.parqueApp.parqueApp.model.Customer;
 import com.parqueApp.parqueApp.model.Employee;
-import com.parqueApp.parqueApp.service.EmployeeService;
+import com.parqueApp.parqueApp.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,11 +34,23 @@ import java.util.List;
 @RequestMapping("/employee/")
 public class EmployeeRest {
     @Autowired
-    private EmployeeService employeeService;
+    private EmployeeRepository employeeRepository;
 
     @RequestMapping(method = RequestMethod.GET, value = "getAllEmployees", produces = MediaType.APPLICATION_JSON_VALUE)
     private List<Employee> getAllEmployees()
     {
-        return employeeService.findAll();
+        return employeeRepository.getAllEmployees();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "getAllEmployeesByParkingLotId/{parking_lot_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    private List<Employee> getAllEmployeesByParkingLotId(@PathVariable("parking_lot_id") long parking_lot_id)
+    {
+        return employeeRepository.getAllEmployeesByParkingLotId(parking_lot_id);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "getEmployeeById/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    private Employee getEmployeeById(@PathVariable("id") long id)
+    {
+        return employeeRepository.getEmployeeById(id);
     }
 }

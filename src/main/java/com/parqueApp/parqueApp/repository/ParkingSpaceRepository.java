@@ -17,10 +17,21 @@ package com.parqueApp.parqueApp.repository;
 
 import com.parqueApp.parqueApp.model.ParkingSpace;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author Yon Mauricio Ruiz Beltrán {@literal <ymruiz@estudiante.uniajc.edu.co>}
  */
 @Repository
-public interface ParkingSpaceRepository extends JpaRepository<ParkingSpace, Long> { }
+public interface ParkingSpaceRepository extends JpaRepository<ParkingSpace, Long> {
+
+    @Query(value = "SELECT ps FROM ParkingSpace ps")
+    List<ParkingSpace> getAllParkingSpaces();
+
+    @Query(value = "SELECT ps FROM ParkingSpace ps WHERE ps.parking_lot.id = :parking_lot_id")
+    List<ParkingSpace> getAllParkingSpacesByParkingLotId(@Param("parking_lot_id") long parking_lot_id);
+}

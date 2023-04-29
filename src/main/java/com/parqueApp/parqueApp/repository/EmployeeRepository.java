@@ -17,10 +17,24 @@ package com.parqueApp.parqueApp.repository;
 
 import com.parqueApp.parqueApp.model.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author Yon Mauricio Ruiz Beltrán {@literal <ymruiz@estudiante.uniajc.edu.co>}
  */
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, Long> { }
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+
+    @Query(value = "SELECT e FROM Employee e")
+    List<Employee> getAllEmployees();
+
+    @Query(value = "SELECT e FROM Employee e WHERE e.id = :id")
+    Employee getEmployeeById(@Param("id") long id);
+
+    @Query(value = "SELECT e FROM Employee e WHERE e.parking_lot.id = :parking_lot_id")
+    List<Employee> getAllEmployeesByParkingLotId(@Param("parking_lot_id") long parking_lot_id);
+}
