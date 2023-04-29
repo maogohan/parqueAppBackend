@@ -16,7 +16,6 @@
 package com.parqueApp.parqueApp.rest;
 
 import com.parqueApp.parqueApp.model.Fee;
-import com.parqueApp.parqueApp.model.ParkingSpace;
 import com.parqueApp.parqueApp.repository.FeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

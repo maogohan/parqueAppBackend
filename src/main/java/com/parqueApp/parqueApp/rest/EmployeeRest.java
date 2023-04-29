@@ -15,7 +15,6 @@
  */
 package com.parqueApp.parqueApp.rest;
 
-import com.parqueApp.parqueApp.model.Customer;
 import com.parqueApp.parqueApp.model.Employee;
 import com.parqueApp.parqueApp.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;

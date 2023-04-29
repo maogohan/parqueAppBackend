@@ -15,18 +15,7 @@
  */
 package com.parqueApp.parqueApp.service;
 
-import com.parqueApp.parqueApp.model.Customer;
-import com.parqueApp.parqueApp.repository.CustomerRepository;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
 
 /**
  * @author Yon Mauricio Ruiz Beltrán {@literal <ymruiz@estudiante.uniajc.edu.co>}

@@ -17,10 +17,20 @@ package com.parqueApp.parqueApp.repository;
 
 import com.parqueApp.parqueApp.model.Vehicle;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author Yon Mauricio Ruiz Beltrán {@literal <ymruiz@estudiante.uniajc.edu.co>}
  */
 @Repository
-public interface VehicleRepository extends JpaRepository<Vehicle, Long> { }
+public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
+    @Query(value = "SELECT v FROM Vehicle v")
+    List<Vehicle> getAllVehicles();
+
+    @Query(value = "SELECT v FROM Vehicle v WHERE v.parking_lot.id = :parking_lot_id")
+    List<Vehicle> getAllVehiclesByParkingLotId(@Param("parking_lot_id") long parking_lot_id);
+}

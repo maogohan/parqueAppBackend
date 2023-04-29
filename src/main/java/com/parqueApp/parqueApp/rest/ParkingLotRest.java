@@ -17,7 +17,6 @@ package com.parqueApp.parqueApp.rest;
 
 import com.parqueApp.parqueApp.model.ParkingLot;
 import com.parqueApp.parqueApp.repository.ParkingLotRepository;
-import com.parqueApp.parqueApp.service.ParkingLotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;

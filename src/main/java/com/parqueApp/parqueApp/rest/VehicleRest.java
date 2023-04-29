@@ -16,9 +16,10 @@
 package com.parqueApp.parqueApp.rest;
 
 import com.parqueApp.parqueApp.model.Vehicle;
-import com.parqueApp.parqueApp.service.VehicleService;
+import com.parqueApp.parqueApp.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,11 +33,17 @@ import java.util.List;
 @RequestMapping("/vehicle/")
 public class VehicleRest {
     @Autowired
-    private VehicleService vehicleService;
+    private VehicleRepository vehicleRepository;
 
     @RequestMapping(method = RequestMethod.GET, value = "getAllVehicles", produces = MediaType.APPLICATION_JSON_VALUE)
     private List<Vehicle> getAllServices()
     {
-        return vehicleService.findAll();
+        return vehicleRepository.getAllVehicles();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "getAllServicesByParkingLotId/{parking_lot_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    private List<Vehicle> getAllServicesByParkingLotId(@PathVariable("parking_lot_id") long parking_lot_id)
+    {
+        return vehicleRepository.getAllVehiclesByParkingLotId(parking_lot_id);
     }
 }

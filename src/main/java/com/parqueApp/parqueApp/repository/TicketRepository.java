@@ -17,10 +17,21 @@ package com.parqueApp.parqueApp.repository;
 
 import com.parqueApp.parqueApp.model.Ticket;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author Yon Mauricio Ruiz Beltrán {@literal <ymruiz@estudiante.uniajc.edu.co>}
  */
 @Repository
-public interface TicketRepository extends JpaRepository<Ticket, Long> { }
+public interface TicketRepository extends JpaRepository<Ticket, Long> {
+
+    @Query(value = "SELECT t FROM Ticket f")
+    List<Ticket> getAllTickets();
+
+    @Query(value = "SELECT t FROM Ticket t WHERE t.vehicle.id = :vehicle_id")
+    List<Ticket> getAllTicketsByVehicleId(@Param("vehicle_id") long vehicle_id);
+}

@@ -17,7 +17,6 @@ package com.parqueApp.parqueApp.rest;
 
 import com.parqueApp.parqueApp.model.Customer;
 import com.parqueApp.parqueApp.repository.CustomerRepository;
-import com.parqueApp.parqueApp.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;

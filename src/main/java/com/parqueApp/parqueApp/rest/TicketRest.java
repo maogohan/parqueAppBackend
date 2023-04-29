@@ -16,9 +16,10 @@
 package com.parqueApp.parqueApp.rest;
 
 import com.parqueApp.parqueApp.model.Ticket;
-import com.parqueApp.parqueApp.service.TicketService;
+import com.parqueApp.parqueApp.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,11 +33,17 @@ import java.util.List;
 @RequestMapping("/ticket/")
 public class TicketRest {
     @Autowired
-    private TicketService ticketService;
+    private TicketRepository ticketRepository;
 
     @RequestMapping(method = RequestMethod.GET, value = "getAllTickets", produces = MediaType.APPLICATION_JSON_VALUE)
     private List<Ticket> getAllTickets()
     {
-        return ticketService.findAll();
+        return ticketRepository.getAllTickets();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "getAllTicketsByVehicletId/{vehicle_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    private List<Ticket> getAllTicketsByVehicletId(@PathVariable("vehicle_id") long vehicle_id)
+    {
+        return ticketRepository.getAllTicketsByVehicleId(vehicle_id);
     }
 }

@@ -40,7 +40,7 @@ public class Fee implements Serializable {
     @Column(columnDefinition = "NUMERIC(10,2)")
     private BigDecimal value;
     @OneToOne
-    @JoinColumn(name = "vehicle")
+    @JoinColumn(name = "id_vehicle")
     private Vehicle vehicle;
 
     public Fee(BigDecimal value, Vehicle vehicle) {

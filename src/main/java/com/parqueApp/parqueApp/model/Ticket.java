@@ -42,7 +42,7 @@ public class Ticket implements Serializable {
     private LocalTime start_time;
     private LocalTime end_time;
     @OneToOne
-    @JoinColumn(name = "vehicle")
+    @JoinColumn(name = "id_vehicle")
     private Vehicle vehicle;
 
     public Ticket(LocalDate date, LocalTime start_time, LocalTime end_time, Vehicle vehicle) {
