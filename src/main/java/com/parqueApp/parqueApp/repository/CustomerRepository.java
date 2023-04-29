@@ -17,10 +17,17 @@ package com.parqueApp.parqueApp.repository;
 
 import com.parqueApp.parqueApp.model.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author Yon Mauricio Ruiz Beltrán {@literal <ymruiz@estudiante.uniajc.edu.co>}
  */
 @Repository
-public interface CustomerRepository extends JpaRepository<Customer, Long> { }
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
+
+    @Query(value = "SELECT c FROM Customer c")
+    List<Customer> getAllCustomers();
+}

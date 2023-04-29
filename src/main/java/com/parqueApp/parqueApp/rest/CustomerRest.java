@@ -16,6 +16,7 @@
 package com.parqueApp.parqueApp.rest;
 
 import com.parqueApp.parqueApp.model.Customer;
+import com.parqueApp.parqueApp.repository.CustomerRepository;
 import com.parqueApp.parqueApp.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -32,11 +33,11 @@ import java.util.List;
 @RequestMapping("/customer/")
 public class CustomerRest {
     @Autowired
-    private CustomerService customerService;
+    private CustomerRepository customerRepository;
 
     @RequestMapping(method = RequestMethod.GET, value = "getAllCustomers", produces = MediaType.APPLICATION_JSON_VALUE)
     private List<Customer> getAllCustomers()
     {
-        return customerService.findAll();
+        return customerRepository.getAllCustomers();
     }
 }
