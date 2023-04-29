@@ -37,13 +37,13 @@ public class Customer implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CustomerId")
     @SequenceGenerator(name = "CustomerId", sequenceName = "CUSTOMER_SEQ")
     private long id;
-    int id_card;
+    BigInteger id_card;
     String first_name;
     String last_name;
     BigInteger phone;
     String address;
 
-    public Customer(int id_card, String first_name, String last_name, int phone, String address, int id_card1, String first_name1, String last_name1, BigInteger phone1, String address1) {
+    public Customer(int id_card, String first_name, String last_name, int phone, String address, BigInteger id_card1, String first_name1, String last_name1, BigInteger phone1, String address1) {
         this.id_card = id_card1;
         this.first_name = first_name1;
         this.last_name = last_name1;
