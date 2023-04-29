@@ -21,6 +21,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 
 /**
  * The class represents the employee lot entity.
@@ -37,16 +38,16 @@ public class Employee implements Serializable {
     @SequenceGenerator(name = "EmployeeId", sequenceName = "EMPLOYEE_SEQ")
     private long id;
     private String employment;
-    int id_card;
+    BigInteger id_card;
     private String first_name;
     private String last_name;
-    private int phone;
+    private BigInteger phone;
     private String address;
     @ManyToOne
     @JoinColumn(name = "id_parking_lot")
     private ParkingLot parking_lot;
 
-    public Employee(String employment, int id_card, String first_name, String last_name, int phone, String address, ParkingLot parking_lot) {
+    public Employee(String employment, BigInteger id_card, String first_name, String last_name, BigInteger phone, String address, ParkingLot parking_lot) {
         this.employment = employment;
         this.id_card = id_card;
         this.first_name = first_name;
