@@ -15,10 +15,43 @@
  */
 package com.parqueApp.parqueApp.service;
 
+import com.parqueApp.parqueApp.model.Fee;
+import com.parqueApp.parqueApp.repository.TicketRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * @author Yon Mauricio Ruiz Beltrán {@literal <ymruiz@estudiante.uniajc.edu.co>}
  */
 @Service
-public class TicketService { }
+public class TicketService {
+    @Autowired
+    private TicketRepository ticketRepository;
+
+    @Autowired
+    private FeeService feeService;
+
+    public void createTicket(LocalTime end_time, LocalTime start_time, long id_vehicle) {
+        Duration duration = Duration.between(start_time, end_time);
+        long diffInHours = duration.toHours();
+
+        Fee fee = feeService.getLastFee();
+        BigDecimal pay = fee != null && fee.getValue() != null ?
+                fee.getValue().multiply(BigDecimal.valueOf(Double.valueOf(diffInHours)))
+                : BigDecimal.valueOf(0);
+
+        ticketRepository.createTicket(
+                LocalDate.now(),
+                end_time,
+                start_time,
+                id_vehicle,
+                0,
+                pay
+                );
+    }
+}

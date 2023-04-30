@@ -17,10 +17,13 @@ package com.parqueApp.parqueApp.repository;
 
 import com.parqueApp.parqueApp.model.Fee;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -33,4 +36,12 @@ public interface FeeRepository extends JpaRepository<Fee, Long> {
 
     @Query(value = "SELECT f FROM Fee f WHERE f.vehicle.id = :vehicle_id")
     List<Fee> getAllFeesByVehicleId(@Param("vehicle_id") long vehicle_id);
+
+    @Modifying
+    @Transactional
+    @Query(value = "INSERT INTO FEE(id, value, id_vehicle) VALUES (NEXTVAL('FEE_SEQ'), :value, :id_vehicle)", nativeQuery = true)
+    void createFee(@Param("value") BigDecimal value, @Param("id_vehicle") long id_vehicle);
+
+    @Query(value = "SELECT * FROM Fee ORDER BY id DESC LIMIT 1", nativeQuery = true)
+    Fee getLastFee();
 }

@@ -17,9 +17,11 @@ package com.parqueApp.parqueApp.repository;
 
 import com.parqueApp.parqueApp.model.ParkingSpace;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -37,4 +39,9 @@ public interface ParkingSpaceRepository extends JpaRepository<ParkingSpace, Long
 
     @Query(value = "SELECT ps FROM ParkingSpace ps WHERE ps.parking_lot.id = :parking_lot_id AND ps.state = 0")
     List<ParkingSpace> getAllParkingSpacesEnableByParkingLotId(@Param("parking_lot_id") long parking_lot_id);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE parking_space SET state = 1 WHERE id = :id", nativeQuery = true)
+    void changeParkingSpaceStateToReserved(@Param("id") long id);
 }

@@ -17,10 +17,15 @@ package com.parqueApp.parqueApp.repository;
 
 import com.parqueApp.parqueApp.model.Ticket;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -34,4 +39,15 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
     @Query(value = "SELECT t FROM Ticket t WHERE t.vehicle.id = :vehicle_id")
     List<Ticket> getAllTicketsByVehicleId(@Param("vehicle_id") long vehicle_id);
+
+    @Modifying
+    @Transactional
+    @Query(value = "INSERT INTO Ticket(id, date, end_time, start_time, id_vehicle, state, pay)" +
+            " VALUES (NEXTVAL('TICKET_SEQ'), :date, :end_time, :start_time, :id_vehicle, :state, :pay)", nativeQuery = true)
+    void createTicket(@Param("date") LocalDate date,
+                   @Param("end_time") LocalTime end_time,
+                   @Param("start_time") LocalTime start_time,
+                   @Param("id_vehicle") long id_vehicle,
+                   @Param("state") int state,
+                   @Param("pay") BigDecimal pay);
 }

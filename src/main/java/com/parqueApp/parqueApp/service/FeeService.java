@@ -15,10 +15,27 @@
  */
 package com.parqueApp.parqueApp.service;
 
+import com.parqueApp.parqueApp.model.Fee;
+import com.parqueApp.parqueApp.repository.FeeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 
 /**
  * @author Yon Mauricio Ruiz Beltrán {@literal <ymruiz@estudiante.uniajc.edu.co>}
  */
 @Service
-public class FeeService { }
+public class FeeService {
+    @Autowired
+    private FeeRepository feeRepository;
+
+    public void createFee(long id_vehicle, String type_vehicle) {
+        BigDecimal value = type_vehicle.equalsIgnoreCase("moto") ? BigDecimal.valueOf(2000) : BigDecimal.valueOf(4000);
+        feeRepository.createFee(value, id_vehicle);
+    }
+
+    public Fee getLastFee() {
+        return feeRepository.getLastFee();
+    }
+}

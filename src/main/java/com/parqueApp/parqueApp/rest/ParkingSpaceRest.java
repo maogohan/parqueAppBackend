@@ -17,6 +17,8 @@ package com.parqueApp.parqueApp.rest;
 
 import com.parqueApp.parqueApp.model.ParkingSpace;
 import com.parqueApp.parqueApp.repository.ParkingSpaceRepository;
+import com.parqueApp.parqueApp.service.FeeService;
+import com.parqueApp.parqueApp.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -32,8 +35,23 @@ import java.util.List;
 @RestController
 @RequestMapping("/parking-space/")
 public class ParkingSpaceRest {
+    /**
+     * Reference to ParkingSpaceRepository
+     */
     @Autowired
     private ParkingSpaceRepository parkingSpaceRepository;
+
+    /**
+     * Reference to FeeService
+     */
+    @Autowired
+    private FeeService feeService;
+
+    /***
+     * Reference to TicketService
+     */
+    @Autowired
+    private TicketService ticketService;
 
     @RequestMapping(method = RequestMethod.GET, value = "getAllParkingSpaces", produces = MediaType.APPLICATION_JSON_VALUE)
     private List<ParkingSpace> getAllParkingSpaces()
@@ -51,5 +69,19 @@ public class ParkingSpaceRest {
     private List<ParkingSpace> getAllParkingSpacesEnableByParkingLotId(@PathVariable("parking_lot_id") long parking_lot_id)
     {
         return parkingSpaceRepository.getAllParkingSpacesEnableByParkingLotId(parking_lot_id);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,
+            value = "reserveParkingSpace/{id_parking_space}/{id_vehicle}/{type_vehicle}/{start_time}/{end_time}")
+    private void reserveParkingSpace(
+            @PathVariable("id_parking_space") long id_parking_space,
+            @PathVariable("id_vehicle") long id_vehicle,
+            @PathVariable("type_vehicle") String type_vehicle,
+            @PathVariable("start_time") LocalTime start_time,
+            @PathVariable("end_time") LocalTime end_time)
+    {
+        parkingSpaceRepository.changeParkingSpaceStateToReserved(id_parking_space);
+        feeService.createFee(id_vehicle, type_vehicle);
+        ticketService.createTicket(end_time, start_time, id_vehicle);
     }
 }

@@ -21,6 +21,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -38,17 +39,20 @@ public class Ticket implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TicketId")
     @SequenceGenerator(name = "TicketId", sequenceName = "TICKET_SEQ")
     private long id;
+    private int state;
     private LocalDate date;
     private LocalTime start_time;
     private LocalTime end_time;
+    private BigDecimal pay;
     @OneToOne
     @JoinColumn(name = "id_vehicle")
     private Vehicle vehicle;
 
-    public Ticket(LocalDate date, LocalTime start_time, LocalTime end_time, Vehicle vehicle) {
+    public Ticket(LocalDate date, LocalTime start_time, LocalTime end_time, BigDecimal pay,Vehicle vehicle) {
         this.date = date;
         this.start_time = start_time;
         this.end_time = end_time;
+        this.pay = pay;
         this.vehicle = vehicle;
     }
 }
