@@ -47,4 +47,7 @@ public interface ParkingSpaceRepository extends JpaRepository<ParkingSpace, Long
     @Transactional
     @Query(value = "UPDATE parking_space SET state = 1 WHERE id = :id", nativeQuery = true)
     void changeParkingSpaceStateToReserved(@Param("id") long id);
+
+    @Query(value = "SELECT ps FROM ParkingSpace ps WHERE ps.type = :type")
+    ParkingSpace getParkingSpaceByType(@Param("type") int type);
 }

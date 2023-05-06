@@ -39,20 +39,15 @@ public class Vehicle implements Serializable {
     private String plate;
     private String type;
     @ManyToOne
-    @JoinColumn(name = "id_employee")
-    private Employee employee;
-    @ManyToOne
     @JoinColumn(name = "id_customer")
     private Customer customer;
-    @OneToOne
-    @JoinColumn(name = "id_parking_space")
+    @ManyToOne
+    @JoinColumn(name = "id_parking_space", nullable = true)
     private ParkingSpace parking_space;
 
-    public Vehicle(String plate, String type, Employee employee, Customer customer, ParkingSpace parking_space) {
+    public Vehicle(String plate, String type, Customer customer) {
         this.plate = plate;
         this.type = type;
-        this.employee = employee;
         this.customer = customer;
-        this.parking_space = parking_space;
     }
 }

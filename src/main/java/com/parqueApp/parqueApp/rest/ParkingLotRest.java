@@ -18,6 +18,7 @@ package com.parqueApp.parqueApp.rest;
 import com.parqueApp.parqueApp.model.ParkingLot;
 import com.parqueApp.parqueApp.repository.ParkingLotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,5 +38,11 @@ public class ParkingLotRest {
     private List<ParkingLot> getAllParkingLot()
     {
         return parkingLotRepository.getAllParkingLots();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "getParkingLotsByParkingSpaceType/{type}", produces = MediaType.APPLICATION_JSON_VALUE)
+    private List<ParkingLot> getParkingLotsByParkingSpaceType(@Param("type") int type)
+    {
+        return parkingLotRepository.getParkingLotsByParkingSpaceType(type);
     }
 }
