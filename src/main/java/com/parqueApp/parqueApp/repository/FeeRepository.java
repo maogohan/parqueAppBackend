@@ -34,9 +34,6 @@ public interface FeeRepository extends JpaRepository<Fee, Long> {
     @Query(value = "SELECT f FROM Fee f")
     List<Fee> getAllFees();
 
-    @Query(value = "SELECT f FROM Fee f WHERE f.vehicle.id = :vehicle_id")
-    List<Fee> getAllFeesByVehicleId(@Param("vehicle_id") long vehicle_id);
-
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO FEE(id, value, id_vehicle) VALUES (NEXTVAL('FEE_SEQ'), :value, :id_vehicle)", nativeQuery = true)
@@ -44,4 +41,7 @@ public interface FeeRepository extends JpaRepository<Fee, Long> {
 
     @Query(value = "SELECT * FROM Fee ORDER BY id DESC LIMIT 1", nativeQuery = true)
     Fee getLastFee();
+
+    @Query(value = "SELECT f FROM Fee f WHERE f.parking_space.id = :parking_space_id")
+    Fee getFeeByParkingSpaceId(@Param("parking_space_id") long parking_space_id);
 }

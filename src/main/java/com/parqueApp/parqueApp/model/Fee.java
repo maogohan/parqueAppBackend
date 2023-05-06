@@ -40,11 +40,11 @@ public class Fee implements Serializable {
     @Column(columnDefinition = "NUMERIC(10,2)")
     private BigDecimal value;
     @OneToOne
-    @JoinColumn(name = "id_vehicle")
-    private Vehicle vehicle;
+    @JoinColumn(name = "id_parking_space")
+    private ParkingSpace parking_space;
 
-    public Fee(BigDecimal value, Vehicle vehicle) {
+    public Fee(BigDecimal value, ParkingSpace parking_space) {
         this.value = value;
-        this.vehicle = vehicle;
+        this.parking_space = parking_space;
     }
 }

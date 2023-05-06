@@ -48,11 +48,11 @@ public class Vehicle implements Serializable {
     @JoinColumn(name = "id_parking_space")
     private ParkingSpace parking_space;
 
-    public Vehicle(String plate, String type, Employee employee, Customer customer, ParkingSpace parkingSpace) {
+    public Vehicle(String plate, String type, Employee employee, Customer customer, ParkingSpace parking_space) {
         this.plate = plate;
         this.type = type;
         this.employee = employee;
         this.customer = customer;
-        this.parking_space = parkingSpace;
+        this.parking_space = parking_space;
     }
 }

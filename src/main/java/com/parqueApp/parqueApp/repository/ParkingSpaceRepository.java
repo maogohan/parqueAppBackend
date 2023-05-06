@@ -40,6 +40,9 @@ public interface ParkingSpaceRepository extends JpaRepository<ParkingSpace, Long
     @Query(value = "SELECT ps FROM ParkingSpace ps WHERE ps.parking_lot.id = :parking_lot_id AND ps.state = 0")
     List<ParkingSpace> getAllParkingSpacesEnableByParkingLotId(@Param("parking_lot_id") long parking_lot_id);
 
+    @Query(value = "SELECT ps FROM ParkingSpace ps WHERE ps.id = :id")
+    ParkingSpace getParkingSpaceById(@Param("id") long id);
+
     @Modifying
     @Transactional
     @Query(value = "UPDATE parking_space SET state = 1 WHERE id = :id", nativeQuery = true)

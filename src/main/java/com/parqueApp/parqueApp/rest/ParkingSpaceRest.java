@@ -76,12 +76,10 @@ public class ParkingSpaceRest {
     private void reserveParkingSpace(
             @PathVariable("id_parking_space") long id_parking_space,
             @PathVariable("id_vehicle") long id_vehicle,
-            @PathVariable("type_vehicle") String type_vehicle,
             @PathVariable("start_time") LocalTime start_time,
             @PathVariable("end_time") LocalTime end_time)
     {
         parkingSpaceRepository.changeParkingSpaceStateToReserved(id_parking_space);
-        feeService.createFee(id_vehicle, type_vehicle);
-        ticketService.createTicket(end_time, start_time, id_vehicle);
+        ticketService.createTicket(end_time, start_time, id_vehicle, id_parking_space);
     }
 }

@@ -38,4 +38,8 @@ public class FeeService {
     public Fee getLastFee() {
         return feeRepository.getLastFee();
     }
+
+    public Fee getFeeByParkingSpaceId(long parking_space_id) {
+        return feeRepository.getFeeByParkingSpaceId(parking_space_id);
+    }
 }
