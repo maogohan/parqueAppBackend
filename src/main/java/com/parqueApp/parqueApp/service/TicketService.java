@@ -16,7 +16,6 @@
 package com.parqueApp.parqueApp.service;
 
 import com.parqueApp.parqueApp.model.Fee;
-import com.parqueApp.parqueApp.model.ParkingSpace;
 import com.parqueApp.parqueApp.repository.ParkingSpaceRepository;
 import com.parqueApp.parqueApp.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,12 +40,11 @@ public class TicketService {
     @Autowired
     private ParkingSpaceRepository parkingSpaceRepository;
 
-    public void createTicket(LocalTime end_time, LocalTime start_time, long id_vehicle, long id_parking_space) {
+    public void createTicket(LocalTime end_time, LocalTime start_time, long id_vehicle, long id_fee) {
         Duration duration = Duration.between(start_time, end_time);
         long diffInHours = duration.toHours();
 
-        ParkingSpace parkingSpace = parkingSpaceRepository.getParkingSpaceById(id_parking_space);
-        Fee fee = feeService.getFeeByParkingSpaceId(parkingSpace.getId());
+        Fee fee = feeService.getFeeById(id_fee);
         BigDecimal pay = fee != null && fee.getValue() != null ?
                 fee.getValue().multiply(BigDecimal.valueOf(Double.valueOf(diffInHours)))
                 : BigDecimal.valueOf(0);

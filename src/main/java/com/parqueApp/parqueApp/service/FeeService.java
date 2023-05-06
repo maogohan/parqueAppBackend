@@ -42,4 +42,8 @@ public class FeeService {
     public Fee getFeeByParkingSpaceId(long parking_space_id) {
         return feeRepository.getFeeByParkingSpaceId(parking_space_id);
     }
+
+    public Fee getFeeById(long id) {
+        return feeRepository.getFeeById(id);
+    }
 }

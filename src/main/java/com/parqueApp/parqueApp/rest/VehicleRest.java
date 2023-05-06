@@ -46,4 +46,11 @@ public class VehicleRest {
     {
         return vehicleRepository.getAllVehiclesByParkingSpaceId(parking_space_id);
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "getAllVehiclesByCustomerId/{customer_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    private List<Vehicle> getAllVehiclesByCustomerId(@PathVariable("customer_id") long customer_id)
+    {
+        return vehicleRepository.getAllVehiclesByCustomerId(customer_id);
+
+    }
 }

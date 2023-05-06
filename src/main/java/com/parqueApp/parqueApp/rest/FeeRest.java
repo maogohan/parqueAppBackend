@@ -19,6 +19,7 @@ import com.parqueApp.parqueApp.model.Fee;
 import com.parqueApp.parqueApp.repository.FeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,5 +39,10 @@ public class FeeRest {
     private List<Fee> getAllFees()
     {
         return feeRepository.getAllFees();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "getFeeByParkingSpaceId/{parking_space_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    private Fee getFeeByParkingSpaceId(@PathVariable("parking_space_id") long parking_space_id) {
+        return feeRepository.getFeeByParkingSpaceId(parking_space_id);
     }
 }

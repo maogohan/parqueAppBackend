@@ -72,14 +72,15 @@ public class ParkingSpaceRest {
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,
-            value = "reserveParkingSpace/{id_parking_space}/{id_vehicle}/{type_vehicle}/{start_time}/{end_time}")
+            value = "reserveParkingSpace/{id_parking_space}/{id_fee}/{id_vehicle}/{start_time}/{end_time}")
     private void reserveParkingSpace(
             @PathVariable("id_parking_space") long id_parking_space,
+            @PathVariable("id_fee") long id_fee,
             @PathVariable("id_vehicle") long id_vehicle,
             @PathVariable("start_time") LocalTime start_time,
             @PathVariable("end_time") LocalTime end_time)
     {
         parkingSpaceRepository.changeParkingSpaceStateToReserved(id_parking_space);
-        ticketService.createTicket(end_time, start_time, id_vehicle, id_parking_space);
+        ticketService.createTicket(end_time, start_time, id_vehicle, id_fee);
     }
 }
