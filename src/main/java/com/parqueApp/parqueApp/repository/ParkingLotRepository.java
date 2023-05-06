@@ -36,5 +36,5 @@ public interface ParkingLotRepository extends JpaRepository<ParkingLot, Long> {
     ParkingLot getParkingLotById(@Param("id") long id);
 
     @Query(value = "SELECT pl FROM ParkingLot pl WHERE pl.id IN( SELECT ps.parking_lot FROM ParkingSpace ps WHERE ps.type= :type)")
-    List<ParkingLot> getParkingLotsByParkingSpaceType(@Param("type") int type);
+    List<ParkingLot> getParkingLotsByParkingSpaceType(@Param("type") String type);
 }
