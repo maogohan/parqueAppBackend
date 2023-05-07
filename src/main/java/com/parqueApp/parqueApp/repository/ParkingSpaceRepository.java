@@ -49,5 +49,8 @@ public interface ParkingSpaceRepository extends JpaRepository<ParkingSpace, Long
     void changeParkingSpaceStateToReserved(@Param("id") long id);
 
     @Query(value = "SELECT ps FROM ParkingSpace ps WHERE ps.type = :type")
-    ParkingSpace getParkingSpaceByType(@Param("type") int type);
+    ParkingSpace getParkingSpaceByType(@Param("type") String type);
+
+    @Query(value = "SELECT ps FROM ParkingSpace ps WHERE ps.state = 0 AND ps.parking_lot.id = :parking_lot_id AND ps.type = :type ORDER BY id ASC LIMIT 1")
+    ParkingSpace getFirstAvailableParkingSpace(@Param("parking_lot_id") long parking_lot_id, @Param("type") String type);
 }

@@ -40,22 +40,17 @@ public class TicketService {
     @Autowired
     private ParkingSpaceRepository parkingSpaceRepository;
 
-    public void createTicket(LocalTime end_time, LocalTime start_time, long id_vehicle, long id_fee) {
+    public void createTicket(LocalDate date_reserve, LocalTime end_time, LocalTime start_time, long id_vehicle, BigDecimal fee_value) {
         Duration duration = Duration.between(start_time, end_time);
         long diffInHours = duration.toHours();
 
-        Fee fee = feeService.getFeeById(id_fee);
-        BigDecimal pay = fee != null && fee.getValue() != null ?
-                fee.getValue().multiply(BigDecimal.valueOf(Double.valueOf(diffInHours)))
-                : BigDecimal.valueOf(0);
-
         ticketRepository.createTicket(
-                LocalDate.now(),
+                date_reserve,
                 end_time,
                 start_time,
                 id_vehicle,
                 0,
-                pay
+                fee_value.multiply(BigDecimal.valueOf(Double.valueOf(diffInHours)))
                 );
     }
 }

@@ -17,9 +17,11 @@ package com.parqueApp.parqueApp.repository;
 
 import com.parqueApp.parqueApp.model.Vehicle;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -36,4 +38,9 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
 
     @Query(value = "SELECT v FROM Vehicle v WHERE v.customer.id = :customer_id")
     List<Vehicle> getAllVehiclesByCustomerId(@Param("customer_id") long customer_id);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Vehicle SET id_parking_space = :id_parking_space WHERE id = :id", nativeQuery = true)
+    void changeParkingSpaceForVehicleById(@Param("id") long id, @Param("id_parking_space") long id_parking_space);
 }

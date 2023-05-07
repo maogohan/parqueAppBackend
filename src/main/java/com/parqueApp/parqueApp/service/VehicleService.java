@@ -15,10 +15,19 @@
  */
 package com.parqueApp.parqueApp.service;
 
+import com.parqueApp.parqueApp.repository.VehicleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * @author Yon Mauricio Ruiz Beltrán {@literal <ymruiz@estudiante.uniajc.edu.co>}
  */
 @Service
-public class VehicleService { }
+public class VehicleService {
+
+    @Autowired
+    private VehicleRepository vehicleRepository;
+    public void changeParkingSpaceForVehicleById(long id_vehicle, long id_parking_space) {
+        vehicleRepository.changeParkingSpaceForVehicleById(id_vehicle, id_parking_space);
+    }
+}

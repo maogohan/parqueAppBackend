@@ -51,6 +51,5 @@ public class VehicleRest {
     private List<Vehicle> getAllVehiclesByCustomerId(@PathVariable("customer_id") long customer_id)
     {
         return vehicleRepository.getAllVehiclesByCustomerId(customer_id);
-
     }
 }
