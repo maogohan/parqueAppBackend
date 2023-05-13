@@ -31,12 +31,12 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/customer/")
-public class CustomerRest {
+public class CustomerRest implements CustomerRestOpenApi {
     @Autowired
     private CustomerRepository customerRepository;
 
     @RequestMapping(method = RequestMethod.GET, value = "getAllCustomers", produces = MediaType.APPLICATION_JSON_VALUE)
-    private List<Customer> getAllCustomers()
+    public List<Customer> getAllCustomers()
     {
         return customerRepository.getAllCustomers();
     }
