@@ -42,7 +42,7 @@ public class CustomerRest implements CustomerRestOpenApi {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getCustomerById/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    private Customer getCustomerById(@PathVariable("id") long id)
+    public Customer getCustomerById(@PathVariable(RestApiConstants.ID) long id)
     {
         return customerRepository.getCustomerById(id);
     }

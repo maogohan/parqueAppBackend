@@ -36,19 +36,19 @@ public class EmployeeRest {
     private EmployeeRepository employeeRepository;
 
     @RequestMapping(method = RequestMethod.GET, value = "getAllEmployees", produces = MediaType.APPLICATION_JSON_VALUE)
-    private List<Employee> getAllEmployees()
+    public List<Employee> getAllEmployees()
     {
         return employeeRepository.getAllEmployees();
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getAllEmployeesByParkingLotId/{parking_lot_id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    private List<Employee> getAllEmployeesByParkingLotId(@PathVariable("parking_lot_id") long parking_lot_id)
+    public List<Employee> getAllEmployeesByParkingLotId(@PathVariable("parking_lot_id") long parking_lot_id)
     {
         return employeeRepository.getAllEmployeesByParkingLotId(parking_lot_id);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getEmployeeById/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    private Employee getEmployeeById(@PathVariable("id") long id)
+    public Employee getEmployeeById(@PathVariable("id") long id)
     {
         return employeeRepository.getEmployeeById(id);
     }

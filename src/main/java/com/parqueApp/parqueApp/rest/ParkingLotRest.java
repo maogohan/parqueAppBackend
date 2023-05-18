@@ -36,13 +36,13 @@ public class ParkingLotRest {
     private ParkingLotRepository parkingLotRepository;
 
     @RequestMapping(method = RequestMethod.GET, value = "getAllParkingLots", produces = MediaType.APPLICATION_JSON_VALUE)
-    private List<ParkingLot> getAllParkingLot()
+    public List<ParkingLot> getAllParkingLot()
     {
         return parkingLotRepository.getAllParkingLots();
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getParkingLotsByParkingSpaceType/{type}", produces = MediaType.APPLICATION_JSON_VALUE)
-    private List<ParkingLot> getParkingLotsByParkingSpaceType(@PathVariable("type") String type)
+    public List<ParkingLot> getParkingLotsByParkingSpaceType(@PathVariable("type") String type)
     {
         return parkingLotRepository.getParkingLotsByParkingSpaceType(type);
     }

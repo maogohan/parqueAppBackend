@@ -17,6 +17,7 @@ package com.parqueApp.parqueApp.rest;
 
 import com.parqueApp.parqueApp.model.Fee;
 import com.parqueApp.parqueApp.repository.FeeRepository;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,18 +32,25 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/fee/")
-public class FeeRest {
+public class FeeRest implements FeeRestOpenApi {
     @Autowired
     private FeeRepository feeRepository;
 
     @RequestMapping(method = RequestMethod.GET, value = "getAllFees", produces = MediaType.APPLICATION_JSON_VALUE)
-    private List<Fee> getAllFees()
+    public List<Fee> getAllFees()
     {
         return feeRepository.getAllFees();
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getFeeByParkingSpaceId/{parking_space_id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    private Fee getFeeByParkingSpaceId(@PathVariable("parking_space_id") long parking_space_id) {
+    public Fee getFeeByParkingSpaceId(@PathVariable("parking_space_id") long parking_space_id) {
         return feeRepository.getFeeByParkingSpaceId(parking_space_id);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "getFeeValueByParkingSpaceTypeAndParkingLotId/{parking_space_type}/{parking_lot_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public double getFeeValueByParkingSpaceTypeAndParkingLotId(
+            @PathVariable("parking_space_type") @NotNull String parking_space_type,
+            @PathVariable("parking_lot_id") long parking_lot_id) {
+        return feeRepository.getFeeValueByParkingSpaceTypeAndParkingLotId(parking_space_type, parking_lot_id);
     }
 }

@@ -45,6 +45,18 @@ public interface FeeRepository extends JpaRepository<Fee, Long> {
     @Query(value = "SELECT f FROM Fee f WHERE f.parking_space.id = :parking_space_id")
     Fee getFeeByParkingSpaceId(@Param("parking_space_id") long parking_space_id);
 
+    @Query(value = "SELECT f.value " +
+            " FROM fee f " +
+            " JOIN parking_space ps" +
+            " ON f.id_parking_space = ps.id" +
+            " JOIN parking_lot pl" +
+            " ON ps.id_parking_lot = pl.id" +
+            " WHERE ps.type = :parking_space_type " +
+            " AND pl.id = :parking_lot_id " +
+            " LIMIT 1", nativeQuery = true)
+    double getFeeValueByParkingSpaceTypeAndParkingLotId(@Param("parking_space_type") String parking_space_type,
+                                 @Param("parking_lot_id") long parking_lot_id);
+
     @Query(value = "SELECT f FROM Fee f WHERE f.id = :id")
     Fee getFeeById(@Param("id") long id);
 }
