@@ -19,12 +19,9 @@ import com.parqueApp.parqueApp.model.ParkingLot;
 import com.parqueApp.parqueApp.noEntity.ParkingLotFilter;
 import com.parqueApp.parqueApp.repository.ParkingLotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
-import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -32,7 +29,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/parking-lot/")
-public class ParkingLotRest {
+public class ParkingLotRest implements ParkingLotRestOpenApi{
     @Autowired
     private ParkingLotRepository parkingLotRepository;
 

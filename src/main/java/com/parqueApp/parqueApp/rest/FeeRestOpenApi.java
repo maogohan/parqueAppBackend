@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
+@RequestMapping("/fee/")
 public interface FeeRestOpenApi {
 
     @Operation(summary = "Get all fees", description = "Detailed fee list", tags = {"fee"})

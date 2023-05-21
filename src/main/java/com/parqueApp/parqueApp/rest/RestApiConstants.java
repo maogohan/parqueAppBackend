@@ -5,6 +5,7 @@ public class RestApiConstants {
     public static final String PARKING_SPACE_ID = "parking_space_id";
     public static final String PARKING_SPACE_TYPE = "parking_space_type";
     public static final String PARKING_LOT_ID ="parking_lot_id";
+    public static final String TYPE = "type";
     /**
      * Responses
      */
