@@ -54,14 +54,4 @@ public class ParkingLot implements Serializable {
         this.latitude = latitude;
         this.longitude = longitude;
     }
-
-    public ParkingLot(long id, String name, LocalTime start_date, LocalTime end_date, String address, BigDecimal latitude, BigDecimal longitude) {
-        this.id = id;
-        this.name = name;
-        this.start_date = start_date;
-        this.end_date = end_date;
-        this.address = address;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
 }
