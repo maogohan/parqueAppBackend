@@ -52,8 +52,8 @@ public class ParkingLotRest {
     public List<ParkingLot> getParkingLotsWithFilters(@RequestBody ParkingLotFilter parkingLotFilter)
     {
         return parkingLotRepository.getParkingLotsWithFilters(
-                parkingLotFilter.getMin_Amount(),
-                parkingLotFilter.getMax_Amount(),
+                parkingLotFilter.getMin_amount(),
+                parkingLotFilter.getMax_amount(),
                 parkingLotFilter.getStart_time(),
                 parkingLotFilter.getEnd_time(),
                 parkingLotFilter.getType()

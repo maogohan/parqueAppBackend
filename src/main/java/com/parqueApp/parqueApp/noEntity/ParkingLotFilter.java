@@ -22,10 +22,10 @@ public class ParkingLotFilter implements Serializable {
     private LocalTime end_time;
 
     @Nullable
-    private double min_Amount;
+    private double min_amount;
 
     @Nullable
-    private double max_Amount;
+    private double max_amount;
 
     private String type;
 }
