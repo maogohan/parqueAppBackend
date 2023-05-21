@@ -16,14 +16,15 @@
 package com.parqueApp.parqueApp.rest;
 
 import com.parqueApp.parqueApp.model.ParkingLot;
+import com.parqueApp.parqueApp.noEntity.ParkingLotFilter;
 import com.parqueApp.parqueApp.repository.ParkingLotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.lang.Nullable;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -45,5 +46,17 @@ public class ParkingLotRest {
     public List<ParkingLot> getParkingLotsByParkingSpaceType(@PathVariable("type") String type)
     {
         return parkingLotRepository.getParkingLotsByParkingSpaceType(type);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "getParkingLotsWithFilters", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<ParkingLot> getParkingLotsWithFilters(@RequestBody ParkingLotFilter parkingLotFilter)
+    {
+        return parkingLotRepository.getParkingLotsWithFilters(
+                parkingLotFilter.getMin_Amount(),
+                parkingLotFilter.getMax_Amount(),
+                parkingLotFilter.getStart_time(),
+                parkingLotFilter.getEnd_time(),
+                parkingLotFilter.getType()
+        );
     }
 }
