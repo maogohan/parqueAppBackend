@@ -50,7 +50,7 @@ public interface ParkingLotRestOpenApi {
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                             array = @ArraySchema(schema = @Schema(implementation = ParkingLot.class))))
     })
-    @RequestMapping(method = RequestMethod.GET, value = "getParkingLotsWithFilters", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, value = "getParkingLotsWithFilters", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ParkingLot> getParkingLotsWithFilters(
             @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "ParkingLotFilter that contains the optional parameters minimum amount, maximum amount, start time, end time, with a mandatory vehicle type.",

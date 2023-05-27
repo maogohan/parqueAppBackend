@@ -45,7 +45,7 @@ public class ParkingLotRest implements ParkingLotRestOpenApi{
         return parkingLotRepository.getParkingLotsByParkingSpaceType(type);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "getParkingLotsWithFilters", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, value = "getParkingLotsWithFilters", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ParkingLot> getParkingLotsWithFilters(@RequestBody ParkingLotFilter parkingLotFilter)
     {
         return parkingLotRepository.getParkingLotsWithFilters(
